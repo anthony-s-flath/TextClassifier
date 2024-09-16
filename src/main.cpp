@@ -11,29 +11,29 @@ int main(int argc, char** argv) {
         return -1;
     }
     
-    string train_dir(argv[1]);
-    string test_dir(argv[2]);
-    string dev_dir(argv[3]);
+    string trainDir(argv[1]);
+    string testDir(argv[2]);
+    string devDir(argv[3]);
 
-    if (train_dir.empty()) {
+    if (trainDir.empty()) {
         cout << "No training data directory specified." << endl;
         return -1;
     }
-    if (test_dir.empty()) {
+    if (testDir.empty()) {
         cout << "No testing data directory specified." << endl;
         return -1;
     }
-    if (dev_dir.empty()) {
+    if (devDir.empty()) {
         cout << "No development data directory specified." << endl;
         return -1;
     }
 
-    DataNavigator train(train_dir);
-    DataNavigator test(test_dir);
-    DataNavigator dev(dev_dir);
+    DataNavigator train(trainDir);
+    DataNavigator test(testDir);
+    DataNavigator dev(devDir);
     
     auto t1 = chrono::high_resolution_clock::now();
-    Classifier classifier(train, test, dev);
+    Classifier classifier(&train, &test, &dev);
     classifier.run();
     auto t2 = chrono::high_resolution_clock::now();
     cout << "it took: " << chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count()

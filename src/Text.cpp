@@ -10,18 +10,13 @@
 #include "Text.h"
 
 
-
-
-
-
-
 Text::Text(string path)
-    : file(path), total_words(0) {
+    : file(path), totalWords(0) {
     read_whole_file(file);
-    word_count.reserve(counts.size());
+    wordCount.reserve(counts.size());
 
     for (auto &it : counts)
-        word_count.emplace_back(it.first, it.second);
+        wordCount.emplace_back(it.first, it.second);
 }
 
 
@@ -50,7 +45,7 @@ void Text::read_whole_file(string path) {
         }
     }
 
-    delete line;
+    delete []line;
     is.close();
 }
 
@@ -83,7 +78,7 @@ void Text::add_word(char* s, size_t length)  {
     *(temp + 1) = '\0';
 
     if (*s != '\0') {
-        ++total_words;
+        ++totalWords;
         ++counts[s];
     }
 }

@@ -11,27 +11,27 @@ DataNavigator::DataNavigator(string path)
 }
 
 string DataNavigator::printable(const Label& label) {
-    string to_print = "";
+    string toPrint = "";
     for (size_t i = 0; i < label.size(); ++i) {
-        to_print += label[i] + ".";
+        toPrint += label[i] + ".";
     }
-    return to_print.substr(0, to_print.size() - 1);
+    return toPrint.substr(0, toPrint.size() - 1);
 }
 
 void DataNavigator::cut(string file) {
     Label label;
 
     // full label
-    size_t l_begin = dir.size() + 1;
-    size_t l_end = file.find_last_of('/');
+    size_t labelBegin = dir.size() + 1;
+    size_t labelEnd = file.find_last_of('/');
     
     size_t e;
-    size_t b = l_begin;
-    while ((e = file.find('.', b + 1)) < l_end) {
+    size_t b = labelBegin;
+    while ((e = file.find('.', b + 1)) < labelEnd) {
         label.push_back(file.substr(b, e - b));
         b = e + 1;
     }
-    label.push_back(file.substr(b, l_end - b));
+    label.push_back(file.substr(b, labelEnd - b));
 
     texts.emplace(file, file);
     labels.insert(label);
