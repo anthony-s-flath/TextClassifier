@@ -15,30 +15,30 @@
 class Classifier {
 private:
     const vector<double> ALPHAS{1, 0.1, 0.01, 0.001};
-    DataNavigator train;
-    DataNavigator test;
-    DataNavigator dev;
-    unordered_map<Label, size_t, LabelHash, LabelEqual> train_size;
-    unordered_map<Label, double, LabelHash, LabelEqual> train_log2_percent;
+    DataNavigator* train;
+    DataNavigator* test;
+    DataNavigator* dev;
+    unordered_map<Label, size_t, LabelHash, LabelEqual> trainSize;
+    unordered_map<Label, double, LabelHash, LabelEqual> trainLog2Percent;
     double alpha;
 
 public:
-    Classifier(DataNavigator &train_nav, DataNavigator &test_nav, DataNavigator &dev);
+    Classifier(DataNavigator* trainNav, DataNavigator* testNav, DataNavigator* devNav);
 
     // irerates over tesing files to classify
     void run();
 
 private:
     // iterates over all training labels to see if they fit
-    Label classify(const Text& text);
+    Label classify(const Text &text);
 
     // iterates over text word counts
-    long double label_likelihood(long double mc, const Label& train_label, const Text& text);
+    long double label_likelihood(long double mc, const Label& trainLabel, const Text& text);
     
     // iterates over instances under label
     long double phi(const Label &label, const char* word);
 
-    long double multinomial_coefficient(const string &test_path);
+    long double multinomial_coefficient(const Text &text);
 
     void set_alpha();
 };

@@ -42,26 +42,26 @@ private:
     static const size_t MAX_FILE_COMP = 1 << MAX_FILE_BIT;
 
     const string file;
-    int total_words;
+    int totalWords;
     unordered_map<string, int> counts;
-    vector<Count> word_count;
+    vector<Count> wordCount;
 
 
 
 public:
     Text()
-        : file(""), total_words(0) {       }
+        : file(""), totalWords(0) {       }
     Text(string path);
 
     const Count& get_count(size_t i) const
-        {   return word_count[i];   }
+        {   return wordCount[i];   }
     int operator[](const char* str)   
         {   return counts[str];   }
         
     int total() const 
-        {   return total_words; }
+        {   return totalWords; }
     size_t size() const
-        { return word_count.size(); }
+        { return wordCount.size(); }
 
 private:
     void read_whole_file(string path);
